@@ -1,3 +1,8 @@
+from rdkit import Chem
+import numpy as np 
+import torch
+from torch_geometric.data import Data, DataLoader, Batch
+
 atoms = [1,3,5,6,7,8,9,11,13,14,15,16,17,19,20,25,26,27,30,33,34,35,38,42,47,50,53, 78, 79, 80,83]
 CHIRAL_TYPES = len(Chem.rdchem.ChiralType.values)
 HYBRIDIZATION_TYPES = len(Chem.rdchem.HybridizationType.values)
