@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import TopKPooling, SAGEConv, EdgePooling
+from torch_geometric.nn import TopKPooling, GCNConv, EdgePooling
 from torch_geometric.nn import global_mean_pool as gap, global_max_pool as gmp
 from torch_geometric.data import Data, DataLoader, Batch
 
@@ -10,9 +10,9 @@ class Net(nn.Module):
     def __init__(self, n_feats, device = 'cpu'):
         super(Net, self).__init__()
         self.atom_embedding = nn.Linear(n_feats, n_feats)
-        self.conv1 = SAGEConv(n_feats, n_feats)
+        self.conv1 = GCNConv(n_feats, n_feats)
         self.pool1 = EdgePooling(n_feats)
-        self.conv2 = SAGEConv(n_feats, n_feats)
+        self.conv2 = GCNConv(n_feats, n_feats)
         self.pool2 = EdgePooling(n_feats)
         self.linear = torch.nn.Linear(2*n_feats, 1)
         self.device = device
